@@ -1,11 +1,21 @@
-import './index.css';
-import GithubImg from './github-octocat.png';
+import * as PIXI from 'pixi.js';
+import Octocat from './octocat.png';
 
-window.addEventListener("load", init);
+window.onload = () => {
+  const app = new PIXI.Application();
+  document.body.appendChild(app.view);
 
-function init() {
-  let img = new Image();
-  img.src = GithubImg;
-  img.classList.add('githubImg');
-  document.body.appendChild(img);
+  app.loader.add('bunny', Octocat).load((loader, resources) => {
+
+      const bunny = new PIXI.Sprite(resources.bunny.texture);
+      bunny.x = app.renderer.width / 2;
+      bunny.y = app.renderer.height / 2;
+      bunny.anchor.x = 0.5;
+      bunny.anchor.y = 0.5;
+      app.stage.addChild(bunny);
+
+      app.ticker.add(() => {
+          bunny.rotation += 0.01;
+      });
+  });
 }
