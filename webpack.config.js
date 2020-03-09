@@ -1,4 +1,5 @@
 var path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     // Change to your "entry-point".
@@ -35,5 +36,8 @@ module.exports = {
     },
     devServer: {
       contentBase: './src'
-    }
+    },
+    plugins: [
+        new CleanWebpackPlugin(),
+    ],
 };
