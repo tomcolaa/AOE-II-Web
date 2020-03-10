@@ -21,9 +21,10 @@ module.exports = {
           },
           {
             test: /\.(png|svg|jpg|gif)$/,
-            use: [
-              'file-loader',
-            ],
+            loader: 'file-loader',
+            options: {
+              outputPath: 'images',
+            }
           },
           {
             test: /\.css$/,
@@ -35,7 +36,8 @@ module.exports = {
         ],
     },
     devServer: {
-      contentBase: './src'
+      contentBase: './src',
+      open: true
     },
     plugins: [
         new CleanWebpackPlugin(),
