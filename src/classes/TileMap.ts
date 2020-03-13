@@ -32,6 +32,10 @@ export default class TileMap extends Map{
     this._textures = textures;
   }
 
+  public get tileMapContainer(): PIXI.Container {
+    return this._tileMapContainer;
+  }
+
   public render(game: Game): void {
     //Render tile map container
     this._tileMapContainer.position.set(
@@ -49,10 +53,29 @@ export default class TileMap extends Map{
   public generateTiles(): void {
     for(let i = 0; i < this._tiles; i++) {
       for(let j = 0; j < this._tiles; j++) {
-        let tile = new Tile( new Vector2(i, j), this._tileSize, this._textures.dirt.texture);
+        let tile = new Tile( new Vector2(i, j), this._tileSize, this.getRandomTile());
         tile.render(this._tileMapIsoPlane);
       }
     }
+  }
+
+  public getRandomTile(): PIXI.Texture {
+    let rand = Math.random();
+    return this._textures.gras.texture;
+    /*
+    if(rand < 0.02) {
+      return this._textures.gras.texture;
+    } else if(rand < 0.2) {
+      return this._textures.sand1.texture;
+    } else if(rand < 0.4) {
+      return this._textures.sand2.texture;
+    } else if(rand < 0.6) {
+      return this._textures.sand3.texture;
+    } else if(rand < 0.8) {
+      return this._textures.sand4.texture;
+    } else if(rand < 1) {
+      return this._textures.sand5.texture;
+    }*/
   }
 
 }

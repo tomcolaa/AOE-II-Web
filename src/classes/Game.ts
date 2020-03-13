@@ -14,6 +14,10 @@ export default class Game {
     this.resize();
   }
 
+  public getObserver(o: number): Observer {
+    return this.observers[o];
+  }
+
   public register(observer: Observer): void {
     this.observers.push(observer);
     observer.game = this;

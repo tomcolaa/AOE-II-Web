@@ -24,4 +24,10 @@ export default class Vector2 {
     this._y = y;
   }
 
+  public toIso(): Vector2 {
+    let isoX = this._x - this._y;
+		let isoY = (this._x + this._y) / 2;
+		return new Vector2(isoX / 1.4, isoY / 1.4);
+  }
+
 }

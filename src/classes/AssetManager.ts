@@ -1,4 +1,4 @@
-import Game from '../classes/Game';
+import Game from './Game.ts';
 import Observer from '../interfaces/Observers.ts';
 import * as PIXI from 'pixi.js';
 
@@ -47,6 +47,10 @@ export default class AssetManager implements Observer {
   */
   public getMapTextures(): Object {
     return this._resources;
+  }
+
+  public getUnitTexture(): PIXI.Texture {
+    return this._resources.axe.texture
   }
 
 }
