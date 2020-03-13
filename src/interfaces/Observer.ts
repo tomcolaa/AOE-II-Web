@@ -3,7 +3,7 @@
  */
 
 export default interface Observer {
-    public set game(game Game): void;
+    public registerGame(game Game): void;
     // Send update to game
     public sendUpdate(msg: string): void;
     // Receive update from game

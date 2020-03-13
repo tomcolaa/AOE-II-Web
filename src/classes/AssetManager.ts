@@ -13,7 +13,7 @@ export default class AssetManager implements Observer {
   /**
    * Interface functions
    */
-  public set game(game: Game): void {
+  public registerGame(game: Game): void {
     this._game = game;
   }
 

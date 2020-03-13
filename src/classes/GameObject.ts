@@ -19,7 +19,7 @@ export default abstract class GameObject {
         this._uuid = uuid || 0; //TODO: || new UUID()
         this._position = position || new Vector2(0, 0);
         this._health = health || 100;
-        this._selected = selected || true;
+        this._selected = selected || false;
         this._movable = movable || false;
         this._debug = debug || false;
         this._texture = texture || null;
@@ -56,6 +56,14 @@ export default abstract class GameObject {
     } else {
       console.error("Debug already set to " + debug);
     }
+  }
+
+  public set sprite(sprite: PIXI.Sprite): void {
+    this._sprite = sprite;
+  }
+
+  public get sprite(): PIXI.Sprite {
+    return this._sprite;
   }
 
   public set texture(texture: PIXI.Texture): void {

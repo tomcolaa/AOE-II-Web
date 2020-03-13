@@ -18,7 +18,7 @@ export default class ObjectManager implements Observer {
   /**
   * Interface functions
   */
-  public set game(game: Game): void {
+  public registerGame(game: Game): void {
     this._game = game;
   }
 
@@ -33,8 +33,19 @@ export default class ObjectManager implements Observer {
     }
   }
 
+  /**
+  * Getter functions
+  */
   public get objectContainer(): PIXI.Container {
     return this._objectContainer;
+  }
+
+  /**
+  * Class functions
+  */
+  public addUnit(unit: Unit): void {
+    this._objects.push(unit);
+    unit.render(this._objectContainer);
   }
 
   public renderObjects(): void {
@@ -44,13 +55,24 @@ export default class ObjectManager implements Observer {
     }
   }
 
-  /**
-  * Add functions
-  */
-
-  public addUnit(unit: Unit): void {
-    this._objects.push(unit);
-    unit.render(this._objectContainer);
+  public selectObjects(p1: Vector2, p2: Vector2): void {
+    this._objects.forEach(obj => {
+			var hitX = false;
+			var hitY = false;
+			var objX = obj.sprite.worldTransform.tx;
+			var objY = obj.sprite.worldTransform.ty;
+			if(p2.x > p1.x) {
+				if(objX > p1.x && objX < p2.x) hitX = true;
+			} else {
+				if(objX < p1.x && objX > p2.x) hitX = true;
+			}
+			if(p2.y > p1.y) {
+				if(objY > p1.y && objY < p2.y) hitY = true;
+			} else {
+				if(objY < p1.y && objY > p2.y) hitY = true;
+			}
+      obj.selected = (hitX && hitY);
+		});
   }
 
 

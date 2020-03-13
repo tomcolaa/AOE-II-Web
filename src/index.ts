@@ -81,9 +81,6 @@ window.onload = () => {
 
     //Start the game
     game.start();
-    window.setTimeout(() => {unit.position = new Vector2(400, 400)}, 1000);
-    window.setTimeout(() => {unit.health = 80}, 1000);
-    window.setTimeout(() => {unit.health = 50}, 2000);
 
   });
 }
