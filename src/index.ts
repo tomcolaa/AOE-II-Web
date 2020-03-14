@@ -90,17 +90,17 @@ window.onload = () => {
     let unit = new Unit();
     unit.position = new Vector2(200, 200);
     unit.texture = assetManager.getUnitTexture();
-    objectManager.addUnit(unit);
+    objectManager.addObject(unit);
     let unit2 = new Unit();
     unit2.position = new Vector2(100, 500);
     unit2.texture = assetManager.getUnitTexture();
     //unit2.debug = true;
-    objectManager.addUnit(unit2);
+    objectManager.addObject(unit2);
     let house = new Building();
     house.position = new Vector2(605, 605);
     house.texture = assetManager.getBuildingTexture();
     //house.debug = true;
-    objectManager.addUnit(house);
+    objectManager.addObject(house);
 
     //Start the game
     game.start();

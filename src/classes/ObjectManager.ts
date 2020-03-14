@@ -44,9 +44,9 @@ export default class ObjectManager implements Observer {
   /**
   * Class functions
   */
-  public addUnit(unit: Unit): void {
-    this._objects.push(unit);
-    unit.render(this._objectContainer);
+  public addObject(object: GameObject): void {
+    this._objects.push(object);
+    object.render(this._objectContainer);
   }
 
   public renderObjects(): void {

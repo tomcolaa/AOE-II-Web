@@ -30,4 +30,10 @@ export default class Vector2 {
 		return new Vector2(isoX / 1.4, isoY / 1.4);
   }
 
+  toCart() {
+		let cartX = (2 * this.y + this.x) / 2;
+		let cartY = (2 * this.y - this.x) / 2;
+    return new Vector2(cartX, cartY);
+	}
+
 }

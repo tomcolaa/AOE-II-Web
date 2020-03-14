@@ -1,4 +1,5 @@
 import Game from '../classes/Game';
+import Unit from '../classes/Unit';
 import Vector2 from './Vector2.ts';
 import Observer from '../interfaces/Observers.ts';
 
@@ -113,7 +114,26 @@ export default class EventManager implements Observer {
   }
 
   private clickEvent(e: Event): void {
-    //TODO
+    if(this._keys["80"]) {
+      let isoPos = new Vector2(e.clientX, e.clientY);
+  		isoPos = this.mouseToIso(
+        new Vector2(e.clientX, e.clientY),
+        this._game.mapManager.map.tileMapContainer,
+        this._game.mapManager.zoom
+      );
+      let unit = new Unit();
+      unit.position = new Vector2(isoPos.x, isoPos.y);
+      unit.texture = this._game.assetManager.getUnitTexture();
+      this._game.objectManager.addObject(unit);
+    }
+  }
+
+  private mouseToIso(click: Vector2, tileMapContainer: PIXI.Container, zoom: number): Vector2 {
+    let cartPos = new Vector2(click.x, click.y).toCart();
+    let mapCart = new Vector2(tileMapContainer.position.x, tileMapContainer.position.y).toCart();
+    let x = ((cartPos.x - mapCart.x) * 2) / (zoom * 2);
+    let y = ((cartPos.y - mapCart.y) * 2) / (zoom * 2);
+    return {'x': x * 1.4, 'y': y * 1.4}
   }
 
 }

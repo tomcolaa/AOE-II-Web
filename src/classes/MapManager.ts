@@ -16,6 +16,10 @@ export default class MapManager implements Observer {
     this._zoom = zoom || 1;
   }
 
+  get map(): Map {
+    return this._map;
+  }
+
   /**
    * Interface functions
    */
