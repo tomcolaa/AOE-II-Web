@@ -26,9 +26,10 @@ export default class ObjectManager implements Observer {
     this._game.receiveUpdate(msg);
   }
 
-  public receiveUpdate(game: Game, delta: number, msg: string): void {
+  public receiveUpdate(game: Game, delta: number, msg: string, param: any): void {
     //console.log("ObjectManager: Update received at " + delta);
     for(let i = 0; i < this._objects.length; i++) {
+      if(msg === "debug") this._objects[i].debug = param;
       this._objects[i].update();
     }
   }

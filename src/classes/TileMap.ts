@@ -8,14 +8,17 @@ export default class TileMap extends Map{
   private _tiles: number;
   private _tileSize: number;
   private _textures: Object;
+  private _tileArray: Tile[];
   private _tileMapContainer: PIXI.Container;
   private _tileMapIsoPlane: PIXI.Graphics;
 
-  public constructor(tiles: number, tileSize: number, textures: Object) {
+  public constructor(tiles: number, tileSize: number, debug: boolean, textures: Object) {
     super();
     this._tiles = tiles || 32;
-    this._tileSize = tileSize || 128;
+    this._tileSize = tileSize || 64;
+    this._debug = debug || false;
     this._textures = textures || new Object();
+    this._tileArray = new Array<Tile>();
     this._tileMapContainer = new PIXI.Container();
     this._tileMapIsoPlane = new PIXI.Graphics();
   }
@@ -26,6 +29,13 @@ export default class TileMap extends Map{
 
   public set tileSize(tileSize: number): void {
     this._tileSize = tileSize;
+  }
+
+  public set debug(debug: boolean): void {
+    this._tileArray.forEach(tile => {
+      tile.debug = debug;
+    });
+    this._debug = debug;
   }
 
   public set textures(textures: Object): void {
@@ -53,8 +63,10 @@ export default class TileMap extends Map{
   public generateTiles(): void {
     for(let i = 0; i < this._tiles; i++) {
       for(let j = 0; j < this._tiles; j++) {
-        let tile = new Tile( new Vector2(i, j), this._tileSize, this.getRandomTile());
-        tile.render(this._tileMapIsoPlane);
+        let tile = new Tile(new Vector2(i, j), this._tileSize, this.getRandomTile(), false);
+        tile.isoPlane = this._tileMapIsoPlane;
+        tile.render();
+        this._tileArray.push(tile);
       }
     }
   }

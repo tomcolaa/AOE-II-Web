@@ -50,12 +50,10 @@ export default abstract class GameObject {
   }
 
   public set debug(debug: boolean): void {
-    if(this._debug !== debug) {
-      this._debug = debug;
+    if(this._debug !== debug && this._sprite !== undefined) {
       if(debug) { this.renderDebug() } else { this.removeDebug() }
-    } else {
-      console.error("Debug already set to " + debug);
     }
+    this._debug = debug;
   }
 
   public set sprite(sprite: PIXI.Sprite): void {

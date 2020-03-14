@@ -21,7 +21,7 @@ export default class AssetManager implements Observer {
     this._game.receiveUpdate(msg);
   }
 
-  public receiveUpdate(game: Game, delta: number, msg: string): void {
+  public receiveUpdate(game: Game, delta: number, msg: string, param: any): void {
     //console.log("AssetManager: Update received at " + delta);
   }
 
@@ -50,7 +50,11 @@ export default class AssetManager implements Observer {
   }
 
   public getUnitTexture(): PIXI.Texture {
-    return this._resources.axe.texture
+    return this._resources.axe.texture;
+  }
+
+  public getBuildingTexture(): PIXI.Texture {
+    return this._resources.barracks5.texture;
   }
 
 }

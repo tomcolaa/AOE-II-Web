@@ -6,10 +6,8 @@ export default class Unit extends GameObject{
   private _direction: number;
   private _action: string;
 
-  public constructor(uuid: number, position: Vector2, health: number,
-    selected: boolean, movable: boolean, debug: boolean, texture: PIXI.Texture,
-    direction: number, action: string) {
-      super(uuid, position, health, selected, movable, debug, texture);
+  public constructor(direction: number, action: string) {
+      super();
       this._direction = direction || 0;
       this._action = action || "stand";
   }

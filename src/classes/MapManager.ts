@@ -27,8 +27,9 @@ export default class MapManager implements Observer {
     this._game.receiveUpdate(msg);
   }
 
-  public receiveUpdate(game: Game, delta: number, msg: string): void {
+  public receiveUpdate(game: Game, delta: number, msg: string, param: any): void {
     //console.log("MapManager: Update received at " + delta);
+    if(msg === "debug") this._map.debug = param;
   }
 
   /**

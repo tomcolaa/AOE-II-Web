@@ -7,9 +7,16 @@ import ObjectManager from './classes/ObjectManager.ts';
 import TileMap from './classes/TileMap.ts';
 import MiniMap from './classes/MiniMap.ts';
 import Unit from './classes/Unit.ts';
+import Building from './classes/Building.ts';
 import Vector2 from './classes/Vector2.ts';
-import GrasImage from './assets/gras_hd.png';
+import GrasImage from './assets/gras1_hd.png';
 import AxeImage from './assets/axe.png';
+import Castle4 from './assets/Castle4.png';
+import ArcheryRange from './assets/Archeryrange1.png';
+import Barracks1 from './assets/Barracks1.png';
+import Barracks5 from './assets/Barracks5.png';
+import House11 from './assets/House11.png';
+import Market1 from './assets/Market1.png';
 import * as PIXI from 'pixi.js';
 
 // Enable debugging
@@ -22,10 +29,16 @@ window.__PIXI_INSPECTOR_GLOBAL_HOOK__.register({ PIXI: PIXI });
 
 const assets: Image = [
   {name: 'gras', image: GrasImage},
-  {name: 'axe', image: AxeImage}
+  {name: 'axe', image: AxeImage},
+  {name: 'archeryRange', image: ArcheryRange},
+  {name: 'castle4', image: Castle4},
+  {name: 'barracks1', image: Barracks1},
+  {name: 'barracks5', image: Barracks5},
+  {name: 'house11', image: House11},
+  {name: 'market1', image: Market1}
 ];
-const TILES = 6;
-const TILE_SIZE = 128;
+const TILES = 16;
+const TILE_SIZE = 69;
 const MAP_ZOOM = 1;
 const MINIMAP_SIZE = 200;
 
@@ -53,6 +66,7 @@ window.onload = () => {
     //Configure tilemap
     tileMap.tiles = TILES;
     tileMap.tileSize = TILE_SIZE;
+    tileMap.debug = true;
     tileMap.textures = assetManager.getMapTextures();
     //Configure minimap
     miniMap.size = MINIMAP_SIZE;
@@ -73,14 +87,36 @@ window.onload = () => {
     objectManager.renderObjects();
 
     //Add test unit
-    var unit = new Unit();
+    let unit = new Unit();
     unit.position = new Vector2(200, 200);
-    //unit.debug = true;
     unit.texture = assetManager.getUnitTexture();
     objectManager.addUnit(unit);
+    let unit2 = new Unit();
+    unit2.position = new Vector2(100, 500);
+    unit2.texture = assetManager.getUnitTexture();
+    //unit2.debug = true;
+    objectManager.addUnit(unit2);
+    let house = new Building();
+    house.position = new Vector2(605, 605);
+    house.texture = assetManager.getBuildingTexture();
+    //house.debug = true;
+    objectManager.addUnit(house);
 
     //Start the game
     game.start();
+
+    //UI
+    let button = document.createElement("button");
+    button.style.position = "fixed";
+    button.style.left = "25px";
+    button.style.top = "10px";
+    button.style.zIndex = "5";
+    button.innerHTML = "Toggle debug"
+    button.addEventListener("click", e => {
+      game.debug = !game.debug;
+      console.log("Game debug set to: " + game.debug);
+    });
+    document.body.append(button);
 
   });
 }

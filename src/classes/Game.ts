@@ -8,18 +8,31 @@ export default class Game {
 
   private app: PIXI.Application;
   private observers: Observer[] = [];
+  private _debug: boolean;
   private _eventManager: EventManager;
   private _mapManager: MapManager;
   private _assetManager: AssetManager;
   private _objectManager: ObjectManager;
 
-  public constructor(app: object) {
+  public constructor(app: object, debug: boolean) {
     this.app = app || new PIXI.Application();
+    this._debug = debug || false;
     this.app.renderer.view.style.position = "absolute";
 		this.app.renderer.view.style.display = "block";
     this.app.renderer.autoResize = true;
     document.body.appendChild(this.app.view);
     this.resize();
+  }
+
+  public get debug(): boolean {
+    return this._debug;
+  }
+
+  public set debug(debug: boolean) {
+    if(this._debug !== debug) {
+      this._debug = debug;
+      this.sendUpdate(this, 0, "debug", debug);
+    }
   }
 
   public get eventManager(): EventManager {
@@ -61,9 +74,9 @@ export default class Game {
     if(msg === "resize") this.resize();
   }
 
-  public sendUpdate(game: Game, delta: number, msg: string): void {
+  public sendUpdate(game: Game, delta: number, msg: string, param: any): void {
     for (const observer of this.observers) {
-      observer.receiveUpdate(game, delta, msg);
+      observer.receiveUpdate(game, delta, msg, param);
     }
   }
 

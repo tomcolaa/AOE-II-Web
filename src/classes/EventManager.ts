@@ -40,7 +40,7 @@ export default class EventManager implements Observer {
     this._game.receiveUpdate(msg);
   }
 
-  public receiveUpdate(game: Game, delta: number, msg: string): void {
+  public receiveUpdate(game: Game, delta: number, msg: string, param: any): void {
     //console.log("EventManager: Update received at " + delta);
 
     /** Object Selection **/

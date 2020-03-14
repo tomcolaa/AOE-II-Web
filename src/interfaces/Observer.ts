@@ -7,5 +7,5 @@ export default interface Observer {
     // Send update to game
     public sendUpdate(msg: string): void;
     // Receive update from game
-    public receiveUpdate(game: Game, delta: number, msg: string): void;
+    public receiveUpdate(game: Game, delta: number, msg: string, param: any): void;
 }
