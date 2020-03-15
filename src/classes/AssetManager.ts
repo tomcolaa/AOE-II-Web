@@ -54,7 +54,7 @@ export default class AssetManager implements Observer {
   }
 
   public getBuildingTexture(): PIXI.Texture {
-    return this._resources.barracks5.texture;
+    return this._resources.archeryRange.texture;
   }
 
 }

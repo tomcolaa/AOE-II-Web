@@ -20,6 +20,26 @@ export default class MapManager implements Observer {
     return this._map;
   }
 
+  set map(map: Map) {
+    this._map = map;
+  }
+
+  get minimap(): Map {
+    return this._minimap;
+  }
+
+  set minimap(minimap: Map) {
+    this._minimap = minimap;
+  }
+
+  get zoom(): number {
+    return this._zoom;
+  }
+
+  set zoom(zoom: number) {
+    this._zoom = zoom;
+  }
+
   /**
    * Interface functions
    */

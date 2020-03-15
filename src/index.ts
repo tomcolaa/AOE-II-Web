@@ -38,7 +38,7 @@ const assets: Image = [
   {name: 'market1', image: Market1}
 ];
 const TILES = 16;
-const TILE_SIZE = 69;
+const TILE_SIZE = 70;
 const MAP_ZOOM = 1;
 const MINIMAP_SIZE = 200;
 
@@ -97,7 +97,7 @@ window.onload = () => {
     //unit2.debug = true;
     objectManager.addObject(unit2);
     let house = new Building();
-    house.position = new Vector2(605, 605);
+    house.position = new Vector2(620, 620);
     house.texture = assetManager.getBuildingTexture();
     //house.debug = true;
     objectManager.addObject(house);

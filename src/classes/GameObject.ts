@@ -31,6 +31,10 @@ export default abstract class GameObject {
     this._uuid = uuid;
   }
 
+  public get position(): Vector2 {
+    return this._position;
+  }
+
   public set position(position: Vector2): void {
     this._position = position;
   }
@@ -38,6 +42,10 @@ export default abstract class GameObject {
   public set health(health: number): void {
     this._health = health;
     if(this._selected) this.renderStats();
+  }
+
+  public get selected(): number {
+    return this._selected;
   }
 
   public set selected(selected: boolean): void {

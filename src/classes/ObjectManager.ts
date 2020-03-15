@@ -37,6 +37,10 @@ export default class ObjectManager implements Observer {
   /**
   * Getter functions
   */
+  public get objects(): GameObject[] {
+    return this._objects;
+  }
+
   public get objectContainer(): PIXI.Container {
     return this._objectContainer;
   }

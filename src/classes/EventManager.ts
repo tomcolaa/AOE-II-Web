@@ -43,6 +43,45 @@ export default class EventManager implements Observer {
 
   public receiveUpdate(game: Game, delta: number, msg: string, param: any): void {
     //console.log("EventManager: Update received at " + delta);
+    let mapManager = this._game.mapManager;
+    let objectManager = this._game.objectManager;
+
+    /** Camera zoom **/
+		mapManager.map.tileMapContainer.scale.x = mapManager.zoom;
+		mapManager.map.tileMapContainer.scale.y = mapManager.zoom / 2;
+  	objectManager.objectContainer.scale.x = mapManager.zoom;
+		objectManager.objectContainer.scale.y = mapManager.zoom;
+
+    /** Player movement **/
+    const SPEED = 2;
+		if(this._keys["87"]) {
+			objectManager.objects.forEach(object => {
+        if(object.constructor.name === "Unit" && object.selected)
+          object.position = object.position.add(-SPEED, -SPEED);
+      });
+		}
+
+    if(this._keys["65"]) {
+			objectManager.objects.forEach(object => {
+        if(object.constructor.name === "Unit" && object.selected)
+          object.position = object.position.add(-SPEED/2, SPEED);
+      });
+		}
+
+    if(this._keys["83"]) {
+			objectManager.objects.forEach(object => {
+        if(object.constructor.name === "Unit" && object.selected)
+          object.position = object.position.add(SPEED, SPEED);
+      });
+		}
+
+    if(this._keys["68"]) {
+			objectManager.objects.forEach(object => {
+        if(object.constructor.name === "Unit" && object.selected)
+          object.position = object.position.add(SPEED/2, -SPEED);
+      });
+		}
+
 
     /** Object Selection **/
 		if(this._mouseDown !== null && this.selectBox === null) {
@@ -110,7 +149,14 @@ export default class EventManager implements Observer {
   }
 
   private scrollEvent(e: Event): void {
-    //TODO
+    const MAX_ZOOM_OUT = 0.3;
+		const MAX_ZOOM_IN = 1.8;
+		let zoom = this._game.mapManager.zoom;
+		if(e.deltaY > 0) {
+			if(zoom > MAX_ZOOM_OUT) this._game.mapManager.zoom = zoom - 0.1;
+		} else {
+			if(zoom < MAX_ZOOM_IN) this._game.mapManager.zoom = zoom + 0.1;
+		}
   }
 
   private clickEvent(e: Event): void {
