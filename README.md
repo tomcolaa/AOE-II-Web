@@ -2,8 +2,11 @@
 This is going to be a recreation of [Age of Empires 2](https://www.ageofempires.com/) using [pixie.js](https://www.pixijs.com/) written mostly in TypeScript. This project is in a very early stage and most parts of the game are not realized yet like map / terrain generation, building placement system, depth sorting and path finding. This very early version includes a showcase of a simple 16 x 16 tilemap and some graphics, unit selection and the debugging interface.
 <br>
 **Table of Contents**
+<br>
 <a href="#demo">Demo</a>
+<br>
 <a href="#install">How to install</a>
+<br>
 <a href="#use">How to use</a>
 
 <div id="demo"></div>
@@ -22,12 +25,15 @@ Follow the "How to install" instructions to get your own development version.
 ## How to install
 To install this repository you require `npm`, `git` and `TypeScript` installed on your machine.
 1. Clone repository
+<br>
 	`git clone https://github.com/tomcolaa/AOE-II-Web.git`
 
 2. Run install
+<br>
 	`npm install`
 
 3. Start development server
+<br>
 	`npm start`
 
 This will start a development server on port 8080 if available and it will open a brwoser window with the url `http://localhost:8080/`
