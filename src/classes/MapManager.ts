@@ -73,6 +73,6 @@ export default class MapManager implements Observer {
   public renderMaps(): void {
     this._map.render(this._game);
     //this._minimap.render(this._game);
-  }o
+  }
 
 }

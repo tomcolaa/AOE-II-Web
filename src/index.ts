@@ -22,9 +22,11 @@ import * as PIXI from 'pixi.js';
 // Enable debugging
 // Used only for debbuging purposes
 // Please remove for production
+/*
 PIXI.useDeprecated();
 window.__PIXI_INSPECTOR_GLOBAL_HOOK__ &&
 window.__PIXI_INSPECTOR_GLOBAL_HOOK__.register({ PIXI: PIXI });
+*/
 /* End of debugging */
 
 const assets: Image = [
