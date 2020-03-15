@@ -24,22 +24,13 @@ Follow the "How to install" instructions to get your own development version.
 
 ## How to install
 To install this repository you require `npm`, `git` and `TypeScript` installed on your machine.
-1. Clone repository
-
-<br>
-
+1. Clone repository <br>
 	`git clone https://github.com/tomcolaa/AOE-II-Web.git`
 
-2. Run install
-
-<br>
-
+2. Run install <br>
 	`npm install`
 
-3. Start development server
-
-<br>
-
+3. Start development server <br>
 	`npm start`
 
 This will start a development server on port 8080 if available and it will open a brwoser window with the url `http://localhost:8080/`
