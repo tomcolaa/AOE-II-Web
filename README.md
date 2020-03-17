@@ -63,7 +63,7 @@ To load assets into the game you can use the AssetManager and the included loadA
 import Castle4 from './assets/Castle4.png';
 
 const assets: Image = [
-  {name: 'gras', image: GrasImage},
+  {name: 'castle', image: Castle4},
   //more assets go here
 ];
 
@@ -72,7 +72,7 @@ game.register(assetManager);
 
 assetManager.loadAssets(assets).then(() => {
 	//Continue here
-}
+})
 ```
 
 ### Creating a TileMap

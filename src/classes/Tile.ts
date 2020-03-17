@@ -1,6 +1,5 @@
 import * as PIXI from 'pixi.js';
-import Vector2 from './Vector2.ts';
-import GrasImage from '../assets/gras.png';
+import Vector2 from './Vector2';
 
 export default class Tile {
 
@@ -10,7 +9,7 @@ export default class Tile {
   private _texture: PIXI.Texture;
   private _isoPlane: PIXI.Graphics;
   private _debug: boolean;
-  private _debugGraphic: PIXI.Graphics;
+  private _debugGraphic: PIXI.Graphics | null;
 
   public constructor(position: Vector2, tileSize: number, texture: PIXI.Texture, debug: boolean) {
     this._position = position;
@@ -20,7 +19,7 @@ export default class Tile {
     this._debugGraphic = null;
   }
 
-  set isoPlane(isoPlane: PIXI.Graphics): void {
+  set isoPlane(isoPlane: PIXI.Graphics) {
     this._isoPlane = isoPlane;
   }
 
@@ -53,7 +52,10 @@ export default class Tile {
   }
 
   public removeDebug(): void {
-    this._isoPlane.removeChild(this._debugGraphic);
+    if (this._debugGraphic) {
+      this._isoPlane.removeChild(this._debugGraphic);
+    }
+
     this._debugGraphic = null;
   }
 

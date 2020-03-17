@@ -1,14 +1,14 @@
 import './index.css'
-import Game from './classes/Game.ts';
-import EventManager from './classes/EventManager.ts';
-import MapManager from './classes/MapManager.ts';
-import AssetManager from './classes/AssetManager.ts';
-import ObjectManager from './classes/ObjectManager.ts';
-import TileMap from './classes/TileMap.ts';
-import MiniMap from './classes/MiniMap.ts';
-import Unit from './classes/Unit.ts';
-import Building from './classes/Building.ts';
-import Vector2 from './classes/Vector2.ts';
+import Game from './classes/Game';
+import EventManager from './classes/EventManager';
+import MapManager from './classes/MapManager';
+import AssetManager from './classes/AssetManager';
+import ObjectManager from './classes/ObjectManager';
+import TileMap from './classes/TileMap';
+import MiniMap from './classes/MiniMap';
+import Unit from './classes/Unit';
+import Building from './classes/Building';
+import Vector2 from './classes/Vector2';
 import GrasImage from './assets/gras1_hd.png';
 import AxeImage from './assets/axe.png';
 import Castle4 from './assets/Castle4.png';
@@ -17,7 +17,7 @@ import Barracks1 from './assets/Barracks1.png';
 import Barracks5 from './assets/Barracks5.png';
 import House11 from './assets/House11.png';
 import Market1 from './assets/Market1.png';
-import * as PIXI from 'pixi.js';
+import {Image, AssetResources} from './types';
 
 // Enable debugging
 // Used only for debbuging purposes
@@ -29,7 +29,7 @@ window.__PIXI_INSPECTOR_GLOBAL_HOOK__.register({ PIXI: PIXI });
 */
 /* End of debugging */
 
-const assets: Image = [
+const assets: Image[] = [
   {name: 'gras', image: GrasImage},
   {name: 'axe', image: AxeImage},
   {name: 'archeryRange', image: ArcheryRange},
@@ -39,6 +39,7 @@ const assets: Image = [
   {name: 'house11', image: House11},
   {name: 'market1', image: Market1}
 ];
+
 const TILES = 16;
 const TILE_SIZE = 70;
 const MAP_ZOOM = 1;
@@ -113,7 +114,7 @@ window.onload = () => {
     button.style.left = "25px";
     button.style.top = "10px";
     button.style.zIndex = "5";
-    button.innerHTML = "Toggle debug"
+    button.innerHTML = "Toggle debug";
     button.addEventListener("click", e => {
       game.debug = !game.debug;
       console.log("Game debug set to: " + game.debug);
@@ -121,4 +122,4 @@ window.onload = () => {
     document.body.append(button);
 
   });
-}
+};

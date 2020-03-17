@@ -1,18 +1,18 @@
 export default class Vector2 {
 
-  private _x;
-  private _y;
+  private _x: number;
+  private _y: number;
 
-  public constructor(x: number, y: number) {
-    this._x = x;
-    this._y = y;
+  public constructor(x?: number, y?: number) {
+    this._x = x || 0;
+    this._y = y || 0;
   }
 
   get x(): number {
     return this._x;
   }
 
-  set x(x: number): void {
+  set x(x: number) {
     this._x = x;
   }
 

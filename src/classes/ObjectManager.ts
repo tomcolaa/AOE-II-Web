@@ -1,8 +1,9 @@
-import Game from './Game.ts';
-import Unit from './Unit.ts';
-import GameObject from './GameObject.ts';
-import Observer from '../interfaces/Observers.ts';
+import Game from './Game';
+import Unit from './Unit';
+import GameObject from './GameObject';
+import Observer from '../interfaces/Observer';
 import * as PIXI from 'pixi.js';
+import Vector2 from "./Vector2";
 
 export default class ObjectManager implements Observer {
 
@@ -54,31 +55,35 @@ export default class ObjectManager implements Observer {
   }
 
   public renderObjects(): void {
-    this._game.app.stage.addChild(this._objectContainer);
+    this._game.getApp().stage.addChild(this._objectContainer);
     for(let i = 0; i < this._objects.length; i++) {
-      this._objects[i].render();
+      this._objects[i].render(this.objectContainer);
     }
   }
 
   public selectObjects(p1: Vector2, p2: Vector2): void {
-    this._objects.forEach(obj => {
-			var hitX = false;
-			var hitY = false;
-			var objX = obj.sprite.worldTransform.tx;
-			var objY = obj.sprite.worldTransform.ty;
-			if(p2.x > p1.x) {
-				if(objX > p1.x && objX < p2.x) hitX = true;
-			} else {
-				if(objX < p1.x && objX > p2.x) hitX = true;
-			}
-			if(p2.y > p1.y) {
-				if(objY > p1.y && objY < p2.y) hitY = true;
-			} else {
-				if(objY < p1.y && objY > p2.y) hitY = true;
-			}
-      obj.selected = (hitX && hitY);
-		});
+      this._objects.forEach(obj => {
+          let hitX = false;
+          let hitY = false;
+          let objX = obj.sprite.worldTransform.tx;
+          let objY = obj.sprite.worldTransform.ty;
+
+          if(p2.x > p1.x) {
+              if(objX > p1.x && objX < p2.x) hitX = true;
+          } else {
+              if(objX < p1.x && objX > p2.x) hitX = true;
+          }
+
+          if(p2.y > p1.y) {
+              if(objY > p1.y && objY < p2.y) {
+                  hitY = true;
+              }
+              else {
+                  if(objY < p1.y && objY > p2.y) hitY = true;
+              }
+          }
+
+          obj.selected = (hitX && hitY);
+      });
   }
-
-
 }

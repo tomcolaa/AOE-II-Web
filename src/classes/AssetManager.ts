@@ -1,12 +1,13 @@
-import Game from './Game.ts';
-import Observer from '../interfaces/Observers.ts';
+import Game from './Game';
+import Observer from '../interfaces/Observer';
 import * as PIXI from 'pixi.js';
+import {Image, AssetResources} from '../types';
 
 export default class AssetManager implements Observer {
 
   private _game: Game;
   private _loader: PIXI.Loader;
-  private _resources: PIXI.Texture[];
+  private _resources: AssetResources;
 
   public constructor() {}
 
@@ -28,12 +29,13 @@ export default class AssetManager implements Observer {
   /**
   * Load assets function
   */
-  public loadAssets(assets: Object[]): Promise {
-    var _this = this;
-    return new Promise((resolve, reject) => {
+  public loadAssets(assets: Image[]): Promise<null> {
+    const _this = this;
+    return new Promise((resolve) => {
       assets.map(asset => {
         PIXI.Loader.shared.add(asset.name, asset.image);
       });
+
       PIXI.Loader.shared.load((loader, resources) => {
         _this._loader = loader;
         _this._resources = resources;
@@ -45,15 +47,17 @@ export default class AssetManager implements Observer {
   /**
   * Load assets function
   */
-  public getMapTextures(): Object {
+  public getMapTextures(): AssetResources {
     return this._resources;
   }
 
   public getUnitTexture(): PIXI.Texture {
+    // @ts-ignore
     return this._resources.axe.texture;
   }
 
   public getBuildingTexture(): PIXI.Texture {
+    // @ts-ignore
     return this._resources.archeryRange.texture;
   }
 

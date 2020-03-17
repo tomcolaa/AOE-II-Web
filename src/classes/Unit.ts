@@ -1,12 +1,12 @@
-import GameObject from './GameObject.ts';
-import Vector2 from './Vector2.ts';
+import GameObject from './GameObject';
+import Vector2 from './Vector2';
 
 export default class Unit extends GameObject{
 
   private _direction: number;
   private _action: string;
 
-  public constructor(direction: number, action: string) {
+  public constructor(direction?: number, action?: string) {
       super();
       this._direction = direction || 0;
       this._action = action || "stand";
