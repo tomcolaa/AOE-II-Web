@@ -1,5 +1,4 @@
-export default public interface Interactable {
+export default interface Interactable {
 
-  private _interactable: boolean;
-
+  _interactable: boolean;
 }

@@ -1,7 +1,8 @@
 import Game from '../classes/Game';
-import Observer from '../interfaces/Observers.ts';
+import Observer from '../interfaces/Observer';
 import TileMap from './TileMap';
 import MiniMap from './MiniMap';
+import Map from './Map';
 
 export default class MapManager implements Observer {
 
@@ -10,7 +11,7 @@ export default class MapManager implements Observer {
   private _minimap: Map;
   private _zoom: number;
 
-  public constructor(map: Map, minimap: Map, zoom: number) {
+  public constructor(map?: Map, minimap?: Map, zoom?: number) {
     this._map = map || new TileMap();
     this._minimap = minimap || new MiniMap();
     this._zoom = zoom || 1;
@@ -53,7 +54,7 @@ export default class MapManager implements Observer {
 
   public receiveUpdate(game: Game, delta: number, msg: string, param: any): void {
     //console.log("MapManager: Update received at " + delta);
-    if(msg === "debug") this._map.debug = param;
+    if(msg === "debug") this._map._debug = param;
   }
 
   /**

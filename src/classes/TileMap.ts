@@ -1,62 +1,68 @@
-import Map from './Map.ts';
-import Tile from './Tile.ts';
-import Vector2 from './Vector2.ts';
+import Map from './Map';
+import Tile from './Tile';
+import Vector2 from './Vector2';
 import * as PIXI from 'pixi.js';
+import Game from "./Game";
+import {Image, AssetResources} from '../types';
 
-export default class TileMap extends Map{
+export default class TileMap extends Map {
 
   private _tiles: number;
   private _tileSize: number;
-  private _textures: Object;
+  private _textures: AssetResources;
   private _tileArray: Tile[];
-  private _tileMapContainer: PIXI.Container;
   private _tileMapIsoPlane: PIXI.Graphics;
 
-  public constructor(tiles: number, tileSize: number, debug: boolean, textures: Object) {
+  public constructor(tiles?: number, tileSize?: number, debug?: boolean, textures?: AssetResources) {
     super();
     this._tiles = tiles || 32;
     this._tileSize = tileSize || 64;
     this._debug = debug || false;
-    this._textures = textures || new Object();
+    this._textures = textures || {};
     this._tileArray = new Array<Tile>();
-    this._tileMapContainer = new PIXI.Container();
+    this._container = new PIXI.Container();
     this._tileMapIsoPlane = new PIXI.Graphics();
   }
 
-  public set tiles(tiles: number): void {
+  public set tiles(tiles: number) {
     this._tiles = tiles;
   }
 
-  public set tileSize(tileSize: number): void {
+  public set tileSize(tileSize: number) {
     this._tileSize = tileSize;
   }
 
-  public set debug(debug: boolean): void {
+  public set debug(debug: boolean) {
     this._tileArray.forEach(tile => {
       tile.debug = debug;
     });
+
     this._debug = debug;
   }
 
-  public set textures(textures: Object): void {
+  public set textures(textures: AssetResources) {
     this._textures = textures;
   }
 
   public get tileMapContainer(): PIXI.Container {
-    return this._tileMapContainer;
+    return this._container;
   }
 
   public render(game: Game): void {
+    const app: PIXI.Application = game.getApp();
+
     //Render tile map container
-    this._tileMapContainer.position.set(
-      game.app.screen.width / 2,
-      game.app.screen.height / 2 - (this._tiles * this._tileSize / 1.4) / 2
+    this._container.position.set(
+        app.screen.width / 2,
+        app.screen.height / 2 - (this._tiles * this._tileSize / 1.4) / 2
     );
-    this._tileMapContainer.scale.y = 0.5;
-    game.app.stage.addChild(this._tileMapContainer);
+
+    this._container.scale.y = 0.5;
+    app.stage.addChild(this._container);
+
     //Render tile map iso plane;
     this._tileMapIsoPlane.rotation = Math.PI / 4;
-    this._tileMapContainer.addChild(this._tileMapIsoPlane);
+    this._container.addChild(this._tileMapIsoPlane);
     this.generateTiles();
   }
 
@@ -73,6 +79,7 @@ export default class TileMap extends Map{
 
   public getRandomTile(): PIXI.Texture {
     let rand = Math.random();
+    // @ts-ignore
     return this._textures.gras.texture;
     /*
     if(rand < 0.02) {
