@@ -1,5 +1,6 @@
-var path = require('path');
+const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
     // Change to your "entry-point".
@@ -39,7 +40,18 @@ module.exports = {
       contentBase: './src',
       open: true
     },
+    devtool: "source-map",
     plugins: [
         new CleanWebpackPlugin(),
     ],
+    optimization:{
+        minimizer: [
+            new TerserPlugin({
+                terserOptions: {
+                    keep_classnames: true,
+                    keep_fnames: true
+                }
+            })
+        ]
+    }
 };
