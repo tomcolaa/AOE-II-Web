@@ -3,15 +3,18 @@ import * as PIXI from "pixi.js";
 
 export default abstract class Map {
 
-  _debug: boolean = false;
+  private _debug: boolean = false;
   protected _container: PIXI.Container;
 
   protected constructor() {}
 
-  public render(game: Game): void {}
-
   public get container(): PIXI.Container {
     return this._container;
   }
+  public set debug(debug: boolean) {
+    this._debug = debug;
+  }
+
+  public render(game: Game): void {}
 
 }

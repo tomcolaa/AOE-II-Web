@@ -15,9 +15,9 @@ export default class TileMap extends Map {
 
   public constructor(tiles?: number, tileSize?: number, debug?: boolean, textures?: AssetResources) {
     super();
+    super.debug = debug || false;
     this._tiles = tiles || 32;
     this._tileSize = tileSize || 64;
-    this._debug = debug || false;
     this._textures = textures || {};
     this._tileArray = new Array<Tile>();
     this._container = new PIXI.Container();
@@ -37,7 +37,7 @@ export default class TileMap extends Map {
       tile.debug = debug;
     });
 
-    this._debug = debug;
+    super.debug = debug;
   }
 
   public set textures(textures: AssetResources) {
