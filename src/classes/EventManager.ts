@@ -6,7 +6,7 @@ import Observer from '../interfaces/Observer';
 export default class EventManager implements Observer {
 
   private _game: Game;
-  private _keys: {[index: string]: boolean};
+  private readonly _keys: {[index: string]: boolean};
   private _mouseDown: Vector2 | null;
   private _mouseUp: Vector2 | null;
   private _mouseMove: Vector2 | null;
@@ -21,7 +21,7 @@ export default class EventManager implements Observer {
     this.selectBox = null;
     this.selectBoxStart = null;
 
-    window.addEventListener("resize", e => this.resize(e));
+    window.addEventListener("resize", () => this.resize());
     window.addEventListener("keydown", e => this.keyDown(e));
     window.addEventListener("keyup", e => this.keyUp(e));
     window.addEventListener("mousedown", e => this.mouseDown(e));
@@ -126,7 +126,7 @@ export default class EventManager implements Observer {
   /**
    * EventListener functions
    */
-  private resize(e: Event): void {
+  private resize(): void {
     this.sendUpdate("resize");
   }
 
